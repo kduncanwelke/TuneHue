@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "AnimatedGradientView",
-      "hash" : "62ca03a2568669734382d2b04bdbf922c081fc8e48d5fea67e95b22c2b8cc72b",
-      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+      "hash" : "ad5bfa5dcc90a43aad691d02fe87b2f286268828263110d38c6ca17a789067d3",
+      "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
     }
   ]
 }
