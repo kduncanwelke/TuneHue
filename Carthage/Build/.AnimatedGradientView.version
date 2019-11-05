@@ -1,0 +1,10 @@
+{
+  "commitish" : "2.0.0",
+  "iOS" : [
+    {
+      "name" : "AnimatedGradientView",
+      "hash" : "62ca03a2568669734382d2b04bdbf922c081fc8e48d5fea67e95b22c2b8cc72b",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
+    }
+  ]
+}

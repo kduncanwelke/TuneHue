@@ -1,0 +1,11 @@
+framework module AnimatedGradientView {
+  umbrella header "AnimatedGradientView-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AnimatedGradientView.Swift {
+    header "AnimatedGradientView-Swift.h"
+    requires objc
+}
