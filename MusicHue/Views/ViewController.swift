@@ -761,14 +761,14 @@ class ViewController: UIViewController {
             }
             print("restricted")
         case .notDetermined:
-            MPMediaLibrary.requestAuthorization() { status in
+            MPMediaLibrary.requestAuthorization() { [weak self] status in
                 if status == .authorized {
                     DispatchQueue.main.async {
                         let myMediaPickerVC = MPMediaPickerController(mediaTypes: MPMediaType.music)
                         myMediaPickerVC.allowsPickingMultipleItems = true
                         myMediaPickerVC.popoverPresentationController?.sourceView = sender
                         myMediaPickerVC.delegate = self
-                        self.present(myMediaPickerVC, animated: true, completion: nil)
+                        self?.present(myMediaPickerVC, animated: true, completion: nil)
                     }
                 }
             }
