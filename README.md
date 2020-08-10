@@ -1,7 +1,30 @@
 # TuneHue
-Relax with music and colors
+Relax with music and colors.
 
 This app is a music player, which combines calmly moving gradients with an intuitive interface and integration with the device's existing music library. By accessing a device's iTunes library, TuneHue allows users to listening to music either on their device or via the cloud, and provides a familiar, straightforwward user experience. Playlists can be added to, changed, and deleted, and features like shake to shuffle are included. Multiple gradient options range from bright, energizing hues, to relaxing cool ones, to suit the user's mood.
+
+![Screenshot of the app TuneHue](https://i.ibb.co/5L76fVf/Screen-Shot-2020-08-10-at-2-42-56-PM.png)
+
+## Description
+Enjoy your favorite music with a fun color-changing background!
+
+With calmly moving gradients, intuitive buttons, and use of your device's existing music library, TuneHue provides a soothing and fun accompaniment to your songs. Multiple gradient options range from bright, energizing hues, to relaxing cool ones - the choice is yours!
+
+Features include:
+
+* Soothing colors to accompany your music
+* Simple, user-friendly interface
+* Multiple gradient color-changing backgrounds to choose from
+* Toggle option for light and dark buttons
+* Native music picker for easy and familiar selection
+* Play songs on your device or from the cloud
+* Deletion option for playlist items
+* Shake to activate and deactivate shuffle
+* Repeat options for song or entire playlist
+* Seeking - simply long press and scrub on the forward or back button
+* In-app purchase restoration for premium gradients; purchases apply to more than one device
+
+Please note: a network connection is required to play cloud-based music, as well as for making and restoring purchases.
 
 ## Dependencies
 [AnimatedGradientView](https://github.com/rwbutler/AnimatedGradientView) is used in this project to create the moving gradient backgrounds. [Carthage](https://github.com/Carthage/Carthage) has been used as the dependency manager for this project - please refer to Carthage documentation for details.
