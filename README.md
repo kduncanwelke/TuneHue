@@ -49,3 +49,5 @@ In-app purchases use Storekit and a product request to retrieve items. A notice 
 
 ## Support
 If you experience trouble using the app, have any questions, or simply want to contact me, you can contact me via email at kduncanwelke@gmail.com. I will be happy to discuss this project.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/S6S03G1HT)
