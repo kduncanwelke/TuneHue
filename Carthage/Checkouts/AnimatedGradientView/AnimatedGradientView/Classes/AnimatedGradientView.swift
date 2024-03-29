@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreGraphics
 import UIKit
 
 public class AnimatedGradientView: UIView {
@@ -23,7 +24,9 @@ public class AnimatedGradientView: UIView {
     
     public var animationValues: [AnimationValue]? {
         didSet {
-            guard let animationValues = animationValues else { return }
+            guard let animationValues = animationValues else {
+                return
+            }
             animations = animationValues.map { values in
                 Animation(colorStrings: values.colors, direction: values.1, type: values.2)
             }
@@ -46,7 +49,14 @@ public class AnimatedGradientView: UIView {
         }
     }
     
-    public var colors: [[UIColor]] = [[.purple, .orange]]
+    public var colors: [[UIColor]] = [[.purple, .orange]] {
+        didSet {
+            if let firstColors = colors.first {
+                gradient?.colors = firstColors.map { $0.cgColor }
+            }
+        }
+    }
+    
     public var colorStrings: [[String]] = [[]] {
         didSet {
             colors = colorStrings.map {
@@ -103,6 +113,9 @@ public class AnimatedGradientView: UIView {
     
     private var gradientColorIndex: Int = 0
     
+    /// Internal state variable prevents the next frame from animating.
+    private var isPaused = false
+    
     private var longestColorArrayCount: Int {
         if let gradientAnimations = animations {
             return gradientAnimations.reduce(0) { (total, animation) in
@@ -127,10 +140,12 @@ public class AnimatedGradientView: UIView {
     // MARK: - View Life Cycle
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        observeApplicationDidBecomeActive()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        observeApplicationDidBecomeActive()
     }
     
     override public func layoutSubviews() {
@@ -150,6 +165,17 @@ public class AnimatedGradientView: UIView {
 }
 
 public extension AnimatedGradientView {
+    func pauseAnimating() {
+        isPaused = true
+    }
+    
+    func resumeAnimating() {
+        isPaused = false
+        if let gradient = self.gradient {
+            animate(gradient, to: gradientNextColors)
+        }
+    }
+    
     func startAnimating() {
         if gradient == nil {
             gradient = configuredGradientLayer()
@@ -167,9 +193,7 @@ public extension AnimatedGradientView {
 }
 
 private extension AnimatedGradientView {
-    
     func animate(_ gradient: CAGradientLayer?, to colors: [CGColor]) {
-        
         let locationsAnimation = CABasicAnimation(keyPath: #keyPath(CAGradientLayer.locations))
         locationsAnimation.fromValue = gradient?.locations
         locationsAnimation.toValue = locations(for: colors)
@@ -194,12 +218,20 @@ private extension AnimatedGradientView {
         animationGroup.isRemovedOnCompletion = false
         animationGroup.timingFunction = CAMediaTimingFunction(name: .linear)
     
-        guard let gradient = self.gradient else { return }
+        guard let gradient = self.gradient else {
+            return
+        }
         gradient.colors = colors
         gradient.locations = locations(for: colors)
         gradient.startPoint = startPoint(direction: currentGradientDirection, type: currentGradientType)
         gradient.endPoint = currentGradientDirection.endPoint
         gradient.add(animationGroup, forKey: "gradient-color-\(gradientColorIndex)")
+    }
+    
+    @objc func applicationDidBecomeActive(_: NSNotification) {
+        if autoAnimate {
+            resumeAnimating()
+        }
     }
     
     func locations(for colors: [CGColor]) -> [NSNumber] {
@@ -274,6 +306,16 @@ private extension AnimatedGradientView {
         return shape
     }
     
+    private func observeApplicationDidBecomeActive() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive(_:)),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
+    }
+    
     private func path(from startPoint: CGPoint, to stopPoint: CGPoint) -> CGPath {
         let path = UIBezierPath()
         path.move(to: startPoint)
@@ -284,8 +326,8 @@ private extension AnimatedGradientView {
 
 extension AnimatedGradientView: CAAnimationDelegate {
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        let shouldRepeat = ((gradientColorIndex % (animationsCount + 1)) == 0 && autoRepeat)
-            || (gradientColorIndex % (animationsCount + 1)) != 0
+        let isLastAnimation = (gradientColorIndex % (animationsCount + 1)) == 0
+        let shouldRepeat = ((isLastAnimation && autoRepeat) || !isLastAnimation) && !isPaused
         if flag, shouldRepeat, let gradient = self.gradient {
             if currentGradientType != gradient.type {
                 type = currentGradientType

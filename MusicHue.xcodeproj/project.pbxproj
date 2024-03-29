@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063442572BA21C14009F975F /* AnimatedGradientView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063442562BA21C14009F975F /* AnimatedGradientView.xcframework */; };
+		063442582BA21C14009F975F /* AnimatedGradientView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 063442562BA21C14009F975F /* AnimatedGradientView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2D0C6552232C27AF001709AD /* UnicornPropertyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D0C6551232C27AF001709AD /* UnicornPropertyList.plist */; };
 		2D0C6554232C3406001709AD /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C6553232C3406001709AD /* Gradient.swift */; };
 		2D2B032F232ABED200A30258 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2B032E232ABED200A30258 /* NetworkMonitor.swift */; };
@@ -34,7 +36,6 @@
 		2DAB7431230C7CFB00DAA42D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DAB742F230C7CFB00DAA42D /* LaunchScreen.storyboard */; };
 		2DAB743C230C7CFB00DAA42D /* MusicHueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB743B230C7CFB00DAA42D /* MusicHueTests.swift */; };
 		2DAB7447230C7E5000DAA42D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAB7446230C7E5000DAA42D /* Extensions.swift */; };
-		2DAB744A230C89A200DAA42D /* AnimatedGradientView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAB7449230C89A200DAA42D /* AnimatedGradientView.framework */; };
 		2DBB86152323142400F6E839 /* TextColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBB86142323142400F6E839 /* TextColor.swift */; };
 		2DC09EAF23295AB40013F187 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC09EAE23295AB40013F187 /* StoreObserver.swift */; };
 		2DC09EB123297DE80013F187 /* CellButtonTapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC09EB023297DE80013F187 /* CellButtonTapDelegate.swift */; };
@@ -57,7 +58,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		063442592BA21C14009F975F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				063442582BA21C14009F975F /* AnimatedGradientView.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		063442562BA21C14009F975F /* AnimatedGradientView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AnimatedGradientView.xcframework; path = Carthage/Build/AnimatedGradientView.xcframework; sourceTree = "<group>"; };
 		2D0C6546232C0F27001709AD /* Unicorn */ = {isa = PBXFileReference; explicitFileType = folder; includeInIndex = 0; path = Unicorn; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0C6548232C0F27001709AD /* ContentInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentInfo.plist; sourceTree = "<group>"; };
 		2D0C6551232C27AF001709AD /* UnicornPropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UnicornPropertyList.plist; sourceTree = "<group>"; };
@@ -131,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DAB744A230C89A200DAA42D /* AnimatedGradientView.framework in Frameworks */,
+				063442572BA21C14009F975F /* AnimatedGradientView.xcframework in Frameworks */,
 				2DE0EE58232843AF001E5F30 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +380,7 @@
 		2DAB7448230C89A200DAA42D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				063442562BA21C14009F975F /* AnimatedGradientView.xcframework */,
 				2DE0EE57232843AF001E5F30 /* StoreKit.framework */,
 				2DAB7449230C89A200DAA42D /* AnimatedGradientView.framework */,
 			);
@@ -560,7 +577,7 @@
 				2DAB741F230C7CF900DAA42D /* Sources */,
 				2DAB7420230C7CF900DAA42D /* Frameworks */,
 				2DAB7421230C7CF900DAA42D /* Resources */,
-				2DAB744B230C89CC00DAA42D /* ShellScript */,
+				063442592BA21C14009F975F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -595,8 +612,9 @@
 		2DAB741B230C7CF900DAA42D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = "Kate Duncan-Welke";
 				TargetAttributes = {
 					2D0C6545232C0F27001709AD = {
@@ -796,28 +814,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2DAB744B230C89CC00DAA42D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/AnimatedGradientView.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AnimatedGradientView.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2DAB741F230C7CF900DAA42D /* Sources */ = {
@@ -1214,6 +1210,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1225,6 +1222,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1275,6 +1273,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1286,6 +1285,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1297,6 +1297,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -1308,6 +1309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8R365GJ52;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1320,6 +1322,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.MusicHue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1331,6 +1334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8R365GJ52;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1343,6 +1347,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.3;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kduncan-welke.MusicHue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

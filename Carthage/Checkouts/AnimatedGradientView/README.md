@@ -45,6 +45,10 @@ To learn more about how to use AnimatedGradientView, check out the [blog post](h
 	- [Frameworks](#frameworks)
 	- [Tools](#tools)
 
+## What's new in AnimatedGradientView 3.0.0?
+
+AnimatedGradientView 3.0.0 provides support for Xcode 12 and raises the minimum deployment target to iOS 9 (dropping support for iOS 8).
+
 ## Quickstart
 
 Creating and adding a new `AnimatedGradientView` as a subview is as simple as follows:
@@ -62,7 +66,7 @@ view.addSubview(animatedGradient)
 You'll also need to remember to import the framework using `import AnimatedGradientView`.
 
 ## Requirements
-AnimatedGradientView is written in Swift 4.2 and is available on iOS 8 or higher.
+AnimatedGradientView is written in Swift 5.0 and is available on iOS 8.0 or higher.
 
 ## Installation
 
@@ -107,6 +111,10 @@ From the macOS Terminal run `carthage update --platform iOS` to build the framew
 
 For more information [see here](https://github.com/Carthage/Carthage#quick-start).
 
+### Swift Package Manager
+
+Swift Package Manager is a dependency manager built right into Xcode 11 and higher. From the File menu, add a new Swift Package dependency to your project and paste in this project's Git URL.
+
 ## Usage
 ### Static Gradients
 
@@ -135,7 +143,7 @@ view.addSubview(gradient)
 AnimatedGradientView supports three types of gradients which can be set using the `type` property.
 
 ```swift
- let gradient = AnimatedGradientView(frame: view.bounds)
+let gradient = AnimatedGradientView(frame: view.bounds)
 gradient.autoAnimate = false
 gradient.colorStrings = [["#3224AE", "#FF66FF"]]
 gradient.type = .axial
@@ -190,6 +198,7 @@ AnimatedGradientView is available under the MIT license. See the [LICENSE file](
 * [Cheats](https://github.com/rwbutler/Cheats) - Retro cheat codes for modern iOS apps.
 * [Connectivity](https://github.com/rwbutler/Connectivity) - Improves on Reachability for determining Internet connectivity in your iOS application.
 * [FeatureFlags](https://github.com/rwbutler/FeatureFlags) - Allows developers to configure feature flags, run multiple A/B or MVT tests using a bundled / remotely-hosted JSON configuration file.
+* [FlexibleRowHeightGridLayout](https://github.com/rwbutler/FlexibleRowHeightGridLayout) - A UICollectionView grid layout designed to support Dynamic Type by allowing the height of each row to size to fit content.
 * [Hash](https://github.com/rwbutler/Hash) - Lightweight means of generating message digests and HMACs using popular hash functions including MD5, SHA-1, SHA-256.
 * [Skylark](https://github.com/rwbutler/Skylark) - Fully Swift BDD testing framework for writing Cucumber scenarios using Gherkin syntax.
 * [TailorSwift](https://github.com/rwbutler/TailorSwift) - A collection of useful Swift Core Library / Foundation framework extensions.
@@ -202,6 +211,7 @@ AnimatedGradientView is available under the MIT license. See the [LICENSE file](
 
 ### Tools
 
+* [Clear DerivedData](https://github.com/rwbutler/ClearDerivedData) - Utility to quickly clear your DerivedData directory simply by typing `cdd` from the Terminal.
 * [Config Validator](https://github.com/rwbutler/ConfigValidator) - Config Validator validates & uploads your configuration files and cache clears your CDN as part of your CI process.
 * [IPA Uploader](https://github.com/rwbutler/IPAUploader) - Uploads your apps to TestFlight & App Store.
 * [Palette](https://github.com/rwbutler/TypographyKitPalette) - Makes your [TypographyKit](https://github.com/rwbutler/TypographyKit) color palette available in Xcode Interface Builder.

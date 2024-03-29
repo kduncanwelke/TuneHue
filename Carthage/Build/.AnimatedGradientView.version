@@ -1,10 +1,28 @@
 {
-  "commitish" : "2.0.0",
+  "Mac" : [
+
+  ],
+  "tvOS" : [
+
+  ],
   "iOS" : [
     {
+      "swiftToolchainVersion" : "5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)",
       "name" : "AnimatedGradientView",
-      "hash" : "ad5bfa5dcc90a43aad691d02fe87b2f286268828263110d38c6ca17a789067d3",
-      "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+      "identifier" : "ios-arm64",
+      "container" : "AnimatedGradientView.xcframework",
+      "hash" : "22350ce2291984fe658dbe6d3ba72c2c7971592bba296f4d58a3303506cbb378"
+    },
+    {
+      "name" : "AnimatedGradientView",
+      "hash" : "bff570244cd128d73a830b299b7457a8c079d227ac2c226912dcf4d14920c006",
+      "swiftToolchainVersion" : "5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)",
+      "identifier" : "ios-arm64_x86_64-simulator",
+      "container" : "AnimatedGradientView.xcframework"
     }
+  ],
+  "commitish" : "3.1.1",
+  "watchOS" : [
+
   ]
 }

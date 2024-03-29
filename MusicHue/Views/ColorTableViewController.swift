@@ -228,10 +228,6 @@ class ColorTableViewController: UITableViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 	
-	@IBAction func aboutPressed(_ sender: UIBarButtonItem) {
-		performSegue(withIdentifier: "showAbout", sender: Any?.self)
-	}
-	
 }
 
 
