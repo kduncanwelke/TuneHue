@@ -19,10 +19,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var background: UIView!
     @IBOutlet weak var subBackground: UIView!
     
-    @IBOutlet weak var addMusic: UITabBarItem!
-    @IBOutlet weak var playlist: UITabBarItem!
-    @IBOutlet weak var colors: UITabBarItem!
-    @IBOutlet weak var info: UITabBarItem!
+    @IBOutlet weak var tabBackground: UIView!
     
     @IBOutlet weak var backButton: UIImageView!
     @IBOutlet weak var forwardButton: UIImageView!
@@ -36,7 +33,6 @@ class ViewController: UIViewController {
 	@IBOutlet weak var repeatButton: UIButton!
 	@IBOutlet weak var shuffleButton: UIButton!
 	
-    @IBOutlet weak var tabBar: UITabBar!
     
     // MARK: Variables
 	
@@ -56,8 +52,6 @@ class ViewController: UIViewController {
         }
 		
 		mediaPlayer.beginGeneratingPlaybackNotifications()
-		
-		//NotificationCenter.default.addObserver(self, selector: #selector(songChanged), name: .MPMusicPlayerControllerNowPlayingItemDidChange, object: mediaPlayer)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(stateChanged), name: .MPMusicPlayerControllerPlaybackStateDidChange, object: mediaPlayer)
 		
@@ -122,6 +116,18 @@ class ViewController: UIViewController {
             self.background.addSubview(animatedGradient)
         }
 	}
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.userInterfaceStyle == .light {
+            textColor = TextColor.black
+        } else {
+            textColor = TextColor.white
+        }
+        
+        configureColors()
+    }
 	
 	override func becomeFirstResponder() -> Bool {
 		return true
@@ -134,22 +140,11 @@ class ViewController: UIViewController {
 			
 			if mediaPlayer.repeatMode != .one && mediaPlayer.shuffleMode == .off {
 				mediaPlayer.shuffleMode = .songs
-				
-				switch textColor {
-					case .white:
-						shuffleButton.setImage(UIImage(named: "shuffle"), for: .normal)
-					case .black:
-						shuffleButton.setImage(UIImage(named: "shuffleblack"), for: .normal)
-				}
+                shuffleButton.setImage(UIImage(named: "shuffle_on_FILL0_wght400_GRAD0_opsz24"), for: .normal)
+
 			} else if mediaPlayer.shuffleMode == .songs {
 				mediaPlayer.shuffleMode = .off
-				
-				switch textColor {
-				case .white:
-					shuffleButton.setImage(UIImage(named: "shuffleoff"), for: .normal)
-				case .black:
-					shuffleButton.setImage(UIImage(named: "shuffleoffblack"), for: .normal)
-				}
+                shuffleButton.setImage(UIImage(named: "shuffle_FILL0_wght400_GRAD0_opsz24"), for: .normal)
 			}
 		}
 	}
@@ -310,19 +305,6 @@ class ViewController: UIViewController {
 		checkStatus()
 	}
 	
-	@objc func songChanged() {
-		print("song changed")
-		checkStatus()
-		timeLabel.text = "0:00"
-		updateProgress()
-		
-		TimerManager.stopTimer()
-		
-		if mediaPlayer.playbackState == .playing {
-			startTimer(doesRepeat: false)
-		}
-	}
-	
 	@objc func stateChanged() {
 		if mediaPlayer.playbackState == .playing {
 			switch textColor {
@@ -376,7 +358,6 @@ class ViewController: UIViewController {
 			do {
 				try managedContext.save()
 				print("saved playlist")
-				//NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reload"), object: nil)
 			} catch {
 				// this should never be displayed but is here to cover the possibility
 				showAlert(title: "Save failed", message: "Notice: Data has not successfully been saved.")
@@ -465,6 +446,7 @@ class ViewController: UIViewController {
         switch textColor {
         case .white:
             subBackground.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.6)
+            tabBackground.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.6)
             forwardButton.image = UIImage(named: "forwarddark")
             backButton.image = UIImage(named: "backwarddark")
             
@@ -476,6 +458,7 @@ class ViewController: UIViewController {
             }
         case .black:
             subBackground.backgroundColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 0.6)
+            tabBackground.backgroundColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 0.6)
             forwardButton.image = UIImage(named: "forwardlight")
             backButton.image = UIImage(named: "backwardlight")
             
@@ -544,7 +527,15 @@ class ViewController: UIViewController {
     }
 	
     @IBAction func backLongPress(_ sender: UILongPressGestureRecognizer) {
-        if sender.state == .ended {
+        if MusicManager.songs.isEmpty {
+            return
+        }
+        
+        if sender.state == .began  {
+            TimerManager.stopTimer()
+            backButton.pressDown()
+            mediaPlayer.beginSeekingBackward()
+        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
             mediaPlayer.endSeeking()
             backButton.popUp()
             checkStatus()
@@ -552,19 +543,11 @@ class ViewController: UIViewController {
             if mediaPlayer.playbackState == .playing {
                 startTimer(doesRepeat: false)
             }
-        } else if sender.state == .began {
-            TimerManager.stopTimer()
-            backButton.pressDown()
-            mediaPlayer.beginSeekingBackward()
-        } else {
-            updateTimeLabel()
-            updateProgress()
         }
     }
 	
     @IBAction func playPausePressed(_ sender: UITapGestureRecognizer) {
         if MusicManager.songs.isEmpty {
-            print("no songs")
             return
         }
         
@@ -611,7 +594,11 @@ class ViewController: UIViewController {
             return
         }
         
-        if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
+        if sender.state == .began {
+            TimerManager.stopTimer()
+            forwardButton.pressDown()
+            mediaPlayer.beginSeekingForward()
+        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
             mediaPlayer.endSeeking()
             forwardButton.popUp()
             checkStatus()
@@ -619,13 +606,6 @@ class ViewController: UIViewController {
             if mediaPlayer.playbackState == .playing {
                 startTimer(doesRepeat: false)
             }
-        } else if sender.state == .began {
-            TimerManager.stopTimer()
-            forwardButton.pressDown()
-            mediaPlayer.beginSeekingForward()
-        } else {
-            updateTimeLabel()
-            updateProgress()
         }
     }
 	
@@ -694,7 +674,6 @@ extension ViewController: MPMediaPickerControllerDelegate {
 		if MusicManager.songs.isEmpty {
 			mediaPlayer.setQueue(with: mediaItemCollection)
 			mediaPlayer.play()
-            print("no songs")
 		} else {
 			let queue = MPMusicPlayerMediaItemQueueDescriptor(itemCollection: mediaItemCollection)
 			mediaPlayer.append(queue)
