@@ -306,6 +306,7 @@ class ViewController: UIViewController {
             if !(MusicManager.songs.contains(playing)) {
                 // playing item was deleted
                 TimerManager.stopTimer()
+                mediaPlayer.prepareToPlay()
             }
         }
         
@@ -316,10 +317,8 @@ class ViewController: UIViewController {
             artist.text = "-"
             albumArt.image = UIImage(named: "noimage")
             TimerManager.stopTimer()
-        } else {
-            mediaPlayer.prepareToPlay()
         }
-		
+        
 		checkStatus()
 	}
 	
@@ -571,8 +570,11 @@ class ViewController: UIViewController {
         
         forwardButton.animateButton()
         mediaPlayer.skipToNextItem()
-        setUI()
         TimerManager.stopTimer()
+        setUI()
+        if mediaPlayer.playbackState == .playing {
+            startTimer(doesRepeat: repeatButton.isEnabled)
+        }
     }
 	
     @IBAction func backTap(_ sender: UITapGestureRecognizer) {
@@ -582,8 +584,11 @@ class ViewController: UIViewController {
         
         backButton.animateButton()
         mediaPlayer.skipToPreviousItem()
-        setUI()
         TimerManager.stopTimer()
+        setUI()
+        if mediaPlayer.playbackState == .playing {
+            startTimer(doesRepeat: repeatButton.isEnabled)
+        }
     }
 	
 	@IBAction func changeRepeat(_ sender: UIButton) {
