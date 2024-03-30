@@ -144,12 +144,12 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hmZ-qJ-zJU">
                                         <rect key="frame" x="13" y="8" width="277" height="41"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y3-Ts-KH6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y3-Ts-KH6">
                                                 <rect key="frame" x="0.0" y="0.0" width="277" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jv-8f-2et">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jv-8f-2et">
                                                 <rect key="frame" x="0.0" y="20.5" width="277" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -192,7 +192,6 @@
                                                             <constraint firstAttribute="width" secondItem="eUL-vb-YRA" secondAttribute="height" multiplier="1:1" id="A3a-H9-sg2"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="bwu-bA-NIg" appends="YES" id="Lhk-P3-FvS"/>
                                                             <outletCollection property="gestureRecognizers" destination="ALo-Md-nJW" appends="YES" id="DEw-4v-7dW"/>
                                                         </connections>
                                                     </imageView>
@@ -214,7 +213,6 @@
                                                         </constraints>
                                                         <connections>
                                                             <outletCollection property="gestureRecognizers" destination="YD9-We-LMx" appends="YES" id="5eR-zy-8L8"/>
-                                                            <outletCollection property="gestureRecognizers" destination="gWa-gh-QCp" appends="YES" id="EzS-Ps-gM3"/>
                                                         </connections>
                                                     </imageView>
                                                 </subviews>
@@ -327,16 +325,6 @@
                         <action selector="backTap:" destination="BYZ-38-t0r" id="vFa-ra-iHG"/>
                     </connections>
                 </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="bwu-bA-NIg">
-                    <connections>
-                        <action selector="backLongPress:" destination="BYZ-38-t0r" id="4w4-mY-6h3"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gWa-gh-QCp">
-                    <connections>
-                        <action selector="forwardLongPress:" destination="BYZ-38-t0r" id="g6D-hR-jJ7"/>
-                    </connections>
-                </pongPressGestureRecognizer>
                 <tapGestureRecognizer id="7y0-xw-gFw">
                     <connections>
                         <action selector="tapMusic:" destination="BYZ-38-t0r" id="AQc-gl-hK4"/>

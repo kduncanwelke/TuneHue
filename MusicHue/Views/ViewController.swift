@@ -301,7 +301,25 @@ class ViewController: UIViewController {
 	
 		mediaPlayer.setQueue(with: collection)
 		save()
-		mediaPlayer.prepareToPlay()
+        
+        if let playing = mediaPlayer.nowPlayingItem {
+            if !(MusicManager.songs.contains(playing)) {
+                // playing item was deleted
+                TimerManager.stopTimer()
+            }
+        }
+        
+        if MusicManager.songs.isEmpty {
+            mediaPlayer.stop()
+            mediaPlayer.nowPlayingItem = nil
+            currentlyPlaying.text = "No selection"
+            artist.text = "-"
+            albumArt.image = UIImage(named: "noimage")
+            TimerManager.stopTimer()
+        } else {
+            mediaPlayer.prepareToPlay()
+        }
+		
 		checkStatus()
 	}
 	
@@ -526,26 +544,6 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "showAbout", sender: Any?.self)
     }
 	
-    @IBAction func backLongPress(_ sender: UILongPressGestureRecognizer) {
-        if MusicManager.songs.isEmpty {
-            return
-        }
-        
-        if sender.state == .began  {
-            TimerManager.stopTimer()
-            backButton.pressDown()
-            mediaPlayer.beginSeekingBackward()
-        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
-            mediaPlayer.endSeeking()
-            backButton.popUp()
-            checkStatus()
-            
-            if mediaPlayer.playbackState == .playing {
-                startTimer(doesRepeat: false)
-            }
-        }
-    }
-	
     @IBAction func playPausePressed(_ sender: UITapGestureRecognizer) {
         if MusicManager.songs.isEmpty {
             return
@@ -586,27 +584,6 @@ class ViewController: UIViewController {
         mediaPlayer.skipToPreviousItem()
         setUI()
         TimerManager.stopTimer()
-    }
-    
-    
-    @IBAction func forwardLongPress(_ sender: UILongPressGestureRecognizer) {
-        if MusicManager.songs.isEmpty {
-            return
-        }
-        
-        if sender.state == .began {
-            TimerManager.stopTimer()
-            forwardButton.pressDown()
-            mediaPlayer.beginSeekingForward()
-        } else if sender.state == .ended || sender.state == .cancelled || sender.state == .failed {
-            mediaPlayer.endSeeking()
-            forwardButton.popUp()
-            checkStatus()
-            
-            if mediaPlayer.playbackState == .playing {
-                startTimer(doesRepeat: false)
-            }
-        }
     }
 	
 	@IBAction func changeRepeat(_ sender: UIButton) {
