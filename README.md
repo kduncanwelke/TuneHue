@@ -3,7 +3,7 @@ Relax with music and colors.
 
 This app is a music player, which combines calmly moving gradients with an intuitive interface and integration with the device's existing music library. By accessing a device's iTunes library, TuneHue allows users to listening to music either on their device or via the cloud, and provides a familiar, straightforwward user experience. Playlists can be added to, changed, and deleted, and features like shake to shuffle are included. Multiple gradient options range from bright, energizing hues, to relaxing cool ones, to suit the user's mood.
 
-![Screenshot of the app TuneHue](https://i.ibb.co/5L76fVf/Screen-Shot-2020-08-10-at-2-42-56-PM.png)
+![Screenshot of the app TuneHue](https://kduncanwelkecom.ipage.com/TuneHue%20Preview.png)
 
 ## Description
 Enjoy your favorite music with a fun color-changing background!
